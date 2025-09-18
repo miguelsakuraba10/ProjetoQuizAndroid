@@ -13,26 +13,26 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class MainActivity extends AppCompatActivity {
 
-    TextView txvPerguntas;
+    TextView txvPergunta;
     RadioGroup rdgPrincipal;
     Button btnResponder;
     int pontuacao = 0;
     int indicePergunta = 0;
 
-    String [] perguntas {
-        "Minha Pergunta 1"
-        "Minha Pergunta 2"
-        "Minha Pergunta 3"
-        "Minha Pergunta 4"
+    String [] perguntas = {
+        "Minha Pergunta 1",
+        "Minha Pergunta 2",
+        "Minha Pergunta 3",
+        "Minha Pergunta 4",
         "Minha Pergunta 5"
     };
 
-    int [] respostasCorretas {
-      R.id.rb_a;
-      R.id.rb_a;
-      R.id.rb_b;
-      R.id.rb_d;
-      R.id.rb_c;
+    int [] respostasCorretas = {
+      R.id.rb_a,
+      R.id.rb_a,
+      R.id.rb_b,
+      R.id.rb_d,
+      R.id.rb_c
     };
 
     @Override
@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        txvPerguntas = findViewById(R.id.txv_perguntas);
-        rdgPrincipal = findViewById(R.id.rdg_principal);
+        txvPergunta = findViewById(R.id.txv_perguntas);
+        rdgPrincipal = findViewById(R.id.rbg_principal);
         btnResponder = findViewById(R.id.btn_responder);
 
         // Nosso Metodo!
@@ -54,5 +54,21 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+        }
+    private void carregarPerguntas(){
+        if(indicePergunta < perguntas.length){
+            //Pegar pergunta do vetor criado
+            txvPergunta.setText(perguntas[indicePergunta]);
+            //Esvaziar marcação da radio caso haja
+            rdgPrincipal.clearCheck();
+            // Deixar o botão responder habilitado
+            btnResponder.setEnabled(true);
+        }
+        else{
+            //Finalizar Quiz
+            txvPergunta.setText("Fim");
+            //Desabilitar botão de resposta
+            btnResponder.setEnabled(false);
+        }
     }
 }
